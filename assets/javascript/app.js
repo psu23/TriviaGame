@@ -2,45 +2,55 @@
 
 var triviaArr = [
 
-    {question: "What does apple start with?",
-    answers: ["A", "B", "C", "D"],
-    correctAns: "A"},
+    {question: "Where was the Declaration of Independence signed?",
+    answers: ["Philadelphia City Hall", "Independence Hall", "Congress Hall", "Liberty Hall"],
+    correctAns: "Independence Hall",
+    image: ("assets/images/independence.jpg")},
 
-    {question: "What does banana start with?",
-    answers: ["A", "B", "C", "D"],
-    correctAns: "B"},
+    {question: "What is the former prison in Fairmount where notorious criminals like Al Capone were held, that is still open for tours and 'haunted house' events during the Halloween season?",
+    answers: ["Alcatraz", "Folsom Prison", "Pennsylvania State Penitentiary", "Eastern State Penitentiary"],
+    correctAns: "Eastern State Penitentiary",
+    image: ("assets/images/eastern.jpg")},
 
-    {question: "What does cat start with?",
-    answers: ["A", "B", "C", "D"],
-    correctAns: "C"},
+    {question: "What street in Philadelphia is America's oldest residential street?",
+    answers: ["Elfreth's Alley", "Acorn Street", "Penn's Alley ", "Aviles Street"],
+    correctAns: "Elfreth's Alley",
+    image: ("assets/images/elfreth.jpg")},
 
-    {question: "What does dog start with?",
-    answers: ["A", "B", "C", "D"],
-    correctAns: "D"},
+    {question: "Which cheesesteak establishment in Passyunk Square is a neighbor and competitor of Pat's King of Steaks?",
+    answers: ["Jim's", "Geno's", "Sonny's", "Abner's"],
+    correctAns: "Geno's",
+    image: ("assets/images/geno.jpg")},
     
-    {question: "What does ear start with?",
-    answers: ["E", "F", "G", "H"],
-    correctAns: "E"},
+    {question: "What is the other more commonly used name of the Washington Square West neighborhood?",
+    answers: ["Chinatown", "Logan Square", "Gayborhood", "Old City"],
+    correctAns: "Gayborhood",
+    image: ("assets/images/gayborhood.jpg")},
 
-    {question: "What does frog start with?",
-    answers: ["E", "F", "G", "H"],
-    correctAns: "F"},
+    {question: "Located in Center City, what is the name of the large enclosed public market where merchants sell produce and prepared foods?",
+    answers: ["Reading Terminal Market", "Benjamin Franklin Market", "Lancaster Market", "Union Market"],
+    correctAns: "Reading Terminal Market",
+    image: ("assets/images/reading.jpg")},
 
-    {question: "What does grass start with?",
-    answers: ["E", "F", "G", "H"],
-    correctAns: "G"},
+    {question: "Which section of Philadelphia does the show 'It's Always Sunny in Philadelphia' take place?",
+    answers: ["North Philadelphia", "South Philadelphia", "East Philadelphia", "West Philadelphia"],
+    correctAns: "South Philadelphia",
+    image: ("assets/images/south.jpg")},
      
-    {question: "What does hear start with?",
-    answers: ["E", "F", "G", "H"],
-    correctAns: "H"},
+    {question: "Philadelphia is a city of many firsts for America. Which of the following is not a title Philadelphia can possess?",
+    answers: ["America's first zoo", "America's first hospital", "Oldest continually running market in America", "Oldest continually running theater"],
+    correctAns: "Oldest continually running market in America",
+    image: ("assets/images/lancaster.jpg")},
 
-    {question: "What does indigo start with?",
-    answers: ["G", "H", "I", "J"],
-    correctAns: "I"},
+    {question: "Philadelphia became home to the first general purpose computer (which weighed 27 tons) in which year?",
+    answers: ["1946", "1956", "1966", "1976"],
+    correctAns: "1946",
+    image: ("assets/images/computer.jpg")},
 
-    {question: "What does jelly start with?",
-    answers: ["G", "H", "I", "J"],
-    correctAns: "J"}
+    {question: "What was Philadehlphia's football team before the Eagles?",
+    answers: ["Penn Flyers", "Reading Lions", "Passyunk Pros", "Frankford Yellow Jackets"],
+    correctAns: "Frankford Yellow Jackets",
+    image: ("assets/images/frankford.jpg")}
     
 ];
 var triviaIndex = 0;
@@ -76,13 +86,13 @@ function pickQuestion() {
     $("p").click(function() {
         if($(this).text() === corr) {
             isAnswered = true;
-            $("#question").text("Correct. The answer is: " + corr);
+            $("#question").text("Correct. The answer is " + corr);
             userCorrect();
         }
 
         else {
             isAnswered = true;
-            $("#question").text("Incorrect. The answer is: " + corr);
+            $("#question").text("Incorrect. The answer is " + corr);
             userIncorrect();
         }
 
@@ -139,6 +149,7 @@ function endQuestion() {
             //do something to remove image
             $("#timer").remove();
 
+            $("#answers").append('<p class = ansClass gameOver>You scored: ' + ((totalCorrect/10) * 100) + '% </p>');
             $("#answers").append('<p class = ansClass gameOver>Correct: ' + totalCorrect + '</p>');
             $("#answers").append('<p class = ansClass gameOver>Wrong: ' + totalIncorrect + '</p>');
             $("#answers").append('<p class = ansClass gameOver>Unanswered: ' + totalUnanswered + '</p>');
