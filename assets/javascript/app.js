@@ -38,7 +38,7 @@ var triviaArr = [
     answers: ["G", "H", "I", "J"],
     correctAns: "I"},
 
-    {question: "What does indigo start with?",
+    {question: "What does jelly start with?",
     answers: ["G", "H", "I", "J"],
     correctAns: "J"}
     
@@ -69,7 +69,7 @@ function pickQuestion() {
     $("#question").html(ques);
 
     for (var i = 0; i < 4; i++) {
-        answ = triviaArr[triviaIndex].answers;
+        answ = triviaArr[triviaIndex].answers[i];
         $("#answers").append('<p class = ansClass id=' + i + '>' + answ + '</p>');
     }
 
@@ -93,7 +93,7 @@ function timer() {
     if (timeLeft === 0) {
         isAnswered = true;
         clearInterval(intervalId);
-        $("#question").text("The answer is: " + corr);
+        $("#question").text("The answer is: " + triviaArr[triviaIndex].correctAns);//Cannot use the variable corr because it's not in scope
         noAnswer();
     }
     else if (isAnswered === true) {
@@ -131,7 +131,7 @@ function endQuestion() {
         setTimeout(function() {
             pickQuestion();
             //do something to remove image
-    }, 5000)}//removes question after 5 seconds
+    }, 3000)}//removes question after 3 seconds
 
     else {
         setTimeout(function() {
