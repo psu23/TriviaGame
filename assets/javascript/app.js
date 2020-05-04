@@ -134,19 +134,19 @@ function noAnswer() {
 function endQuestion() {
 
     $(".ansClass").remove();
-    //make something that shows an image when the answer is revealed
+    $("#answers").append('<img class = ansImg width = "200" src = "' + triviaArr[triviaIndex].image + '">');//give image a class so that it can be remove()-d later
     triviaIndex++;
 
     if (triviaIndex < triviaArr.length) {
         setTimeout(function() {
             pickQuestion();
-            //do something to remove image
-    }, 3000)}//removes question after 3 seconds
+            $('.ansImg').remove();
+    }, 3000)}//remove question and image after 3 seconds
 
     else {
         setTimeout(function() {
             $("#question").remove();
-            //do something to remove image
+            $('.ansImg').remove();
             $("#timer").remove();
 
             $("#answers").append('<p class = ansClass gameOver>You scored: ' + ((totalCorrect/10) * 100) + '% </p>');
