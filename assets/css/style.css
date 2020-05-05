@@ -17,6 +17,20 @@ h1, .wrapper, .image-wrapper {
     text-align: center;
 }
 
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 50px;
+    color: #00173f;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+#game, #row {
+    font-family: 'Chivo', sans-serif;
+    font-size: 20px;
+}
+
 #timer {
     color: red;
     font-weight: bold;
@@ -26,8 +40,13 @@ h1, .wrapper, .image-wrapper {
     font-weight: bold;
 }
 
-.image-wrapper {
+#answers {
+    color: rgb(138, 138, 139);
+}
 
+img {
+    border: dashed 5px #00173f;
+    margin-bottom: 10px;
 }
 
 #answers {
