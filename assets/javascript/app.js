@@ -12,8 +12,8 @@ var triviaArr = [
     correctAns: "Eastern State Penitentiary",
     image: ("assets/images/eastern.jpg")},
 
-    {question: "What street in Philadelphia is America's oldest residential street?",
-    answers: ["Elfreth's Alley", "Acorn Street", "Penn's Alley ", "Aviles Street"],
+    {question: "Which street in Philadelphia is America's oldest residential street?",
+    answers: ["Elfreth's Alley", "Acorn Street", "Penn's Alley", "Aviles Street"],
     correctAns: "Elfreth's Alley",
     image: ("assets/images/elfreth.jpg")},
 
@@ -22,7 +22,7 @@ var triviaArr = [
     correctAns: "Geno's",
     image: ("assets/images/geno.jpg")},
     
-    {question: "What is the other more commonly used name of the Washington Square West neighborhood?",
+    {question: "What is the other (more commonly used) name of the Washington Square West neighborhood?",
     answers: ["Chinatown", "Logan Square", "Gayborhood", "Old City"],
     correctAns: "Gayborhood",
     image: ("assets/images/gayborhood.jpg")},
@@ -32,13 +32,13 @@ var triviaArr = [
     correctAns: "Reading Terminal Market",
     image: ("assets/images/reading.jpg")},
 
-    {question: "Which section of Philadelphia does the show 'It's Always Sunny in Philadelphia' take place?",
+    {question: "In which part of Philadelphia does the show 'It's Always Sunny in Philadelphia' take place?",
     answers: ["North Philadelphia", "South Philadelphia", "East Philadelphia", "West Philadelphia"],
     correctAns: "South Philadelphia",
     image: ("assets/images/south.jpg")},
      
-    {question: "Philadelphia is a city of many firsts for America. Which of the following is not a title Philadelphia can possess?",
-    answers: ["America's first zoo", "America's first hospital", "Oldest continually running market in America", "Oldest continually running theater"],
+    {question: "Philadelphia is a city of many firsts for America. Which of the following is, however, not something Philadelphia has?",
+    answers: ["America's first zoo", "America's first hospital", "Oldest continually running market in America", "Oldest continually running theater in the world"],
     correctAns: "Oldest continually running market in America",
     image: ("assets/images/lancaster.jpg")},
 
@@ -134,7 +134,7 @@ function noAnswer() {
 function endQuestion() {
 
     $(".ansClass").remove();
-    $("#answers").append('<img class = ansImg width = "200" src = "' + triviaArr[triviaIndex].image + '">');//give image a class so that it can be remove()-d later
+    $("#image-div").append('<img class = ansImg width = "400" src = "' + triviaArr[triviaIndex].image + '">');//give image a class so that it can be remove()-d later
     triviaIndex++;
 
     if (triviaIndex < triviaArr.length) {
