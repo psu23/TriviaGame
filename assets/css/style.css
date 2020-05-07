@@ -53,3 +53,8 @@ img {
     cursor: pointer;
 }
 
+.endResult {
+    color: black;
+    font-weight: bold;
+}
+

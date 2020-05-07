@@ -1,7 +1,8 @@
 //Define variables
+$(document).ready(function() {//embed entire code in document.ready for jQuery use
 
-var triviaArr = [
-
+var triviaArr = [ //define triviaArr as array of various questions grouped with their respective choices,..  
+//..correct answer and an image to appear upon completion of the user answering the question
     {question: "Where was the Declaration of Independence signed?",
     answers: ["Philadelphia City Hall", "Independence Hall", "Congress Hall", "Liberty Hall"],
     correctAns: "Independence Hall",
@@ -53,19 +54,18 @@ var triviaArr = [
     image: ("assets/images/frankford.jpg")}
     
 ];
-var triviaIndex = 0;
+var triviaIndex = 0;//defines the number of the question that will be asked
 var totalCorrect = 0;
 var totalIncorrect = 0;
 var totalUnanswered = 0;
-var isAnswered = false;
-var timeLeft = 15;
-var intervalId;
-
+var isAnswered = false;//define a variable that determines whether user should answer the question, so a timer function be started
+var timeLeft = 15;//user will have 15 seconds to answer question
+var intervalId;//define a global variable that will determine the intervals of the timer function 
 
 //Define functions
 
-function pickQuestion() {
-    isAnswered = false;
+function pickQuestion() {//this function picks the question, and shows its appropriate 
+    isAnswered = false;//(re)set isAnswered variable to false
     timeLeft = 15;//reset timeLeft to 15 (seconds)
     intervalId = setInterval(timer, 1000);//timer will count down from 15 sec.
     
@@ -73,38 +73,38 @@ function pickQuestion() {
         timer();//start the timer if the question has not been answered
     }
 
-    var corr = triviaArr[triviaIndex].correctAns;
-    var ques = triviaArr[triviaIndex].question;
-    var answ;
-    $("#question").html(ques);
+    var corr = triviaArr[triviaIndex].correctAns;//create shorthand variables for the current q's correct answer..
+    var ques = triviaArr[triviaIndex].question;//..question..
+    var answ;//..and the 4 choices that will be appended with a for loop.
+    $("#question").html(ques);//add the question to the question div in the html on the page
 
     for (var i = 0; i < 4; i++) {
         answ = triviaArr[triviaIndex].answers[i];
         $("#answers").append('<p class = ansClass id=' + i + '>' + answ + '</p>');
-    }
+    }//this loop appends the four choices of the current question
 
-    $("p").click(function() {
-        if($(this).text() === corr) {
+    $(".ansClass").click(function() {//needed to define ansClass above so that other p's, if clicked (like the question) the script would still run
+        if($(this).text() === corr) {//if the text clicked matches the correct answer..
             isAnswered = true;
             $("#question").text("Correct. The answer is " + corr);
-            userCorrect();
+            userCorrect();//..show the answer is right and run the userCorrect function
         }
 
         else {
             isAnswered = true;
             $("#question").text("Incorrect. The answer is " + corr);
-            userIncorrect();
+            userIncorrect();//..otherwise run the userIncorrect function
         }
 
     });
 }
 
-function timer() {
+function timer() {//if question is answered, or time runs out, reset the interval, otherwise, take one second off (from 15) every 1000 milliseconds (1 sec)
     if (timeLeft === 0) {
-        isAnswered = true;
+        isAnswered = true;//if time runs out, mark the question as answered so that intervals and questions can be reset
         clearInterval(intervalId);
         $("#question").text("The answer is: " + triviaArr[triviaIndex].correctAns);//Cannot use the variable corr because it's not in scope
-        noAnswer();
+        noAnswer();//run no answer script
     }
     else if (isAnswered === true) {
         clearInterval(intervalId);
@@ -115,10 +115,10 @@ function timer() {
     }
     
 }
-
+//these next three functions are called upon based on whether the user answered the questions in/correctly or did not answer
 function userCorrect() {
     totalCorrect++;
-    endQuestion();
+    endQuestion();//end question function is called
 }
 
 function userIncorrect() {
@@ -131,11 +131,11 @@ function noAnswer() {
     endQuestion();
 }
 
-function endQuestion() {
-
+function endQuestion() {//endQuestion removes the answers, replaces it with the appropriate result and an 
+//..image representing the answer
     $(".ansClass").remove();
     $("#image-div").append('<img class = ansImg width = "400" src = "' + triviaArr[triviaIndex].image + '">');//give image a class so that it can be remove()-d later
-    triviaIndex++;
+    triviaIndex++;//..increment the trivia index to the next, so that next question in the array will be called upon
 
     if (triviaIndex < triviaArr.length) {
         setTimeout(function() {
@@ -143,34 +143,35 @@ function endQuestion() {
             $('.ansImg').remove();
     }, 3000)}//remove question and image after 3 seconds
 
-    else {
+    else {//if all questions have been answered, remove the questions, answers and images, and show results
         setTimeout(function() {
             $("#question").remove();
             $('.ansImg').remove();
             $("#timer").remove();
 
-            $("#answers").append('<p class = ansClass gameOver>You scored: ' + ((totalCorrect/10) * 100) + '% </p>');
+            $("#answers").append('<p class = endResult gameOver>You scored: ' + ((totalCorrect/10) * 100) + '%! </p>');
             $("#answers").append('<p class = ansClass gameOver>Correct: ' + totalCorrect + '</p>');
             $("#answers").append('<p class = ansClass gameOver>Wrong: ' + totalIncorrect + '</p>');
             $("#answers").append('<p class = ansClass gameOver>Unanswered: ' + totalUnanswered + '</p>');
 
             setTimeout(function() {
                 location.reload();
-            }, 7000);
-        }, 5000);
+            }, 10000);//after the final results are shown for 10 seconds, refresh the page to start the game again
+        }, 3000);//show the results 3 seconds after the last question is answered ("happens" before the previous line)
     };
 
 }
 
-function begin() {
-    $("#start").remove();
-    totalCorrect = 0;
+function begin() {//upon clicking start button defined below,..
+    $("#start").remove();//..remove the start button..
+    totalCorrect = 0;//..set scores to zero..
     totalIncorrect = 0;
     totalUnanswered = 0;
-    pickQuestion();
-    console.log("Begin")
+    pickQuestion();//..run pick Question function
 }
 
 $("#start").on("click", function() {
     begin();
 })
+
+});
