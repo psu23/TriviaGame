@@ -80,10 +80,10 @@ function pickQuestion() {//this function picks the question, and shows its appro
 
     for (var i = 0; i < 4; i++) {
         answ = triviaArr[triviaIndex].answers[i];
-        $("#answers").append('<p class = ansClass id=' + i + '>' + answ + '</p>');
+        $("#answers").append('<p class = ans-class id=' + i + '>' + answ + '</p>');
     }//this loop appends the four choices of the current question
 
-    $(".ansClass").click(function() {//needed to define ansClass above so that other p's, if clicked (like the question) the script would still run
+    $(".ans-class").click(function() {//needed to define ansClass above so that other p's, if clicked (like the question) the script would still run
         if($(this).text() === corr) {//if the text clicked matches the correct answer..
             isAnswered = true;
             $("#question").text("Correct. The answer is " + corr);
@@ -133,26 +133,26 @@ function noAnswer() {
 
 function endQuestion() {//endQuestion removes the answers, replaces it with the appropriate result and an 
 //..image representing the answer
-    $(".ansClass").remove();
-    $("#image-div").append('<img class = ansImg width = "400" src = "' + triviaArr[triviaIndex].image + '">');//give image a class so that it can be remove()-d later
+    $(".ans-class").remove();
+    $("#image-div").append('<img class = ans-img width = "400" src = "' + triviaArr[triviaIndex].image + '">');//give image a class so that it can be remove()-d later
     triviaIndex++;//..increment the trivia index to the next, so that next question in the array will be called upon
 
     if (triviaIndex < triviaArr.length) {
         setTimeout(function() {
             pickQuestion();
-            $('.ansImg').remove();
+            $('.ans-img').remove();
     }, 3000)}//remove question and image after 3 seconds
 
     else {//if all questions have been answered, remove the questions, answers and images, and show results
         setTimeout(function() {
             $("#question").remove();
-            $('.ansImg').remove();
+            $('.ans-img').remove();
             $("#timer").remove();
 
-            $("#answers").append('<p class = endResult gameOver>You scored: ' + ((totalCorrect/10) * 100) + '%! </p>');
-            $("#answers").append('<p class = ansClass gameOver>Correct: ' + totalCorrect + '</p>');
-            $("#answers").append('<p class = ansClass gameOver>Wrong: ' + totalIncorrect + '</p>');
-            $("#answers").append('<p class = ansClass gameOver>Unanswered: ' + totalUnanswered + '</p>');
+            $("#answers").append('<p class = end-result gameOver>You scored: ' + ((totalCorrect/10) * 100) + '%! </p>');
+            $("#answers").append('<p class = ans-class gameOver>Correct: ' + totalCorrect + '</p>');
+            $("#answers").append('<p class = ans-class gameOver>Wrong: ' + totalIncorrect + '</p>');
+            $("#answers").append('<p class = ans-class gameOver>Unanswered: ' + totalUnanswered + '</p>');
 
             setTimeout(function() {
                 location.reload();
